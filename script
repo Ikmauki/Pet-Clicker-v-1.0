@@ -1,0 +1,114 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Click Script", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+OrionLib:MakeNotification({
+	Name = "Good News!",
+	Content = "These all features work for Android's.",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+--Values
+
+_G.autoClick = true
+_G.autoRebirth = true
+_G.increasejump = true
+_G.decreasejump = true
+
+--Functions
+
+local function autoClick()
+    while _G.autoClick == true do
+        game:GetService("ReplicatedStorage").events.ClickEvent:FireServer("cReq",false)
+        wait(.00000001)
+     end
+end
+
+local function autoRebirth()
+    while _G.autoRebirth == true do
+        game:GetService("ReplicatedStorage").events.RebirthEvent:FireServer("req_Rebirth",1)
+        wait(.0000001)
+     end
+end
+
+local function jpup()
+    while _G.increasejump == true do
+        game.Workspace.whynousername124.Humanoid.UseJumpPower = true
+        task.wait(1)
+        game.Workspace.whynousername124.Humanoid.JumpPower = 100
+    end
+end
+
+local function jpdown()
+    while _G.decreasejump == true do
+        game.Workspace.whynousername124.Humanoid.UseJumpPower = true
+        task.wait(1)
+        game.Workspace.whynousername124.Humanoid.JumpPower = 50
+    end
+end
+
+--Tabs
+
+local Farm = Window:MakeTab({
+	Name = "Auto Farm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Movement = Window:MakeTab({
+	Name = "Movement",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--Toggles
+
+Farm:AddToggle({
+	Name = "Auto Click",
+	Default = false,
+	Callback = function(Value)
+		_G.autoClick = Value
+	end    
+})
+
+Farm:AddToggle({
+	Name = "Auto Rebirth",
+	Default = false,
+	Callback = function(Value)
+		_G.autoRebirth = Value
+	end    
+})
+
+Movement:AddToggle({
+	Name = "Set Speed to 100",
+	Default = false,
+	Callback = function(Value)
+		game.Workspace.whynousername124.Humanoid.WalkSpeed = 100
+	end    
+})
+
+Movement:AddToggle({
+	Name = "Set Speed to Normal",
+	Default = false,
+	Callback = function(Value)
+		game.Workspace.whynousername124.Humanoid.WalkSpeed = 16
+	end    
+})
+
+Movement:AddToggle({
+	Name = "Set JumpPower to 100",
+	Default = false,
+	Callback = function(Value)
+		_G.increasejump = Value
+	end    
+})
+
+Movement:AddToggle({
+	Name = "Set JumpPower to Normal",
+	Default = false,
+	Callback = function(Value)
+		_G.decreasejump = Value
+	end    
+})
+
+OrionLib:Init()
